@@ -1,19 +1,43 @@
 <h1><%= @list.name %></h1>
 
 <% if @list.tasks.any? %>
-  <h4>Here are the tasks for this list:</h4>
+  <h4>Here are the <em>unfinished</em> tasks for this list:</h4>
 
   <ul>
-    <% @list.tasks.each do |task| %>
+    <% @list.tasks.not_done.each do |task| %>
       <li>
         <%= task.description %> |
         <%= link_to "Edit", edit_list_task_path(@list, task) %> |
         <%= link_to "Delete", list_task_path(@list, task),
                                  :data => {:confirm => "Are you sure?",
                                                 :method => "delete"} %>
+        <%= form_for [@list, task] do |f| %>
+          <%= f.hidden_field :done, :value => true %>
+          <p><%= f.submit "mark done" %></p>
+        <% end %>
       </li>
     <% end %>
   </ul>
+
+  <h4>Here are the <em>finished</em> tasks for this list:</h4>
+
+  <ul>
+    <% @list.tasks.done.each do |task| %>
+      <li>
+        <%= task.description %> |
+        <%= link_to "Edit", edit_list_task_path(@list, task) %> |
+        <%= link_to "Delete", list_task_path(@list, task),
+                                 :data => {:confirm => "Are you sure?",
+                                                :method => "delete"} %>
+        <%= form_for [@list, task] do |f| %>
+          <%= f.hidden_field :done, :value => false %>
+          <p><%= f.submit "mark unfinished" %></p>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+
 <% else %>
   <p>There are no tasks yet!</p>
 <% end %>
