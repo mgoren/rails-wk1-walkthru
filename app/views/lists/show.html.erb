@@ -13,7 +13,7 @@
                                                 :method => "delete"} %>
         <%= form_for [@list, task] do |f| %>
           <%= f.hidden_field :done, :value => true %>
-          <p><%= f.submit "mark done" %></p>
+          <p><%= f.submit "mark done", class: 'btn btn-link' %></p>
         <% end %>
       </li>
     <% end %>
@@ -31,7 +31,7 @@
                                                 :method => "delete"} %>
         <%= form_for [@list, task] do |f| %>
           <%= f.hidden_field :done, :value => false %>
-          <p><%= f.submit "mark unfinished" %></p>
+          <p><%= f.submit "mark unfinished", class: 'btn btn-link' %></p>
         <% end %>
       </li>
     <% end %>
