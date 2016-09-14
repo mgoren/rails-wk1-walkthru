@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 describe "the edit a task process" do
+
+  before do
+    user = FactoryGirl.create(:user)
+    login_as(user)
+  end
+
   it "edits a task" do
     list = List.create(:name => 'Home stuff')
     task = Task.create(:description => 'Wash the dishes', :list_id => list.id)
@@ -20,4 +26,5 @@ describe "the edit a task process" do
     click_button 'Update Task'
     expect(page).to have_content 'errors'
   end
+
 end
