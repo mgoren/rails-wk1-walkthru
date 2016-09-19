@@ -1,0 +1,6 @@
+$("#task_<%= @task.id %>").remove();
+<%= @list.tasks.done.any? %> ? $('#finished-tasks').removeClass('hidden') : $('#finished-tasks').addClass('hidden');
+<%= @list.tasks.not_done.any? %> ? $('#unfinished-tasks').removeClass('hidden') : $('#unfinished-tasks').addClass('hidden');
+if(<%= !@list.tasks.any? %>) {
+ $('#no-tasks').removeClass('hidden');
+}

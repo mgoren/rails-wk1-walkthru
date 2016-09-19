@@ -1,0 +1,8 @@
+$("#task_<%= @task.id %>").remove();
+<%= @list.tasks.done.any? %> ? $('#finished-tasks').removeClass('hidden') : $('#finished-tasks').addClass('hidden');
+<%= @list.tasks.not_done.any? %> ? $('#unfinished-tasks').removeClass('hidden') : $('#unfinished-tasks').addClass('hidden');
+if(<%= @task.done %>) {
+  $('#finished-tasks ul').append("<%= j render @task %>");
+} else {
+  $('#unfinished-tasks ul').append("<%= j render @task %>");
+}

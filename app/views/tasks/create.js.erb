@@ -1,0 +1,5 @@
+$('form#new_task').remove();
+$('#new_task_link').show();
+$('#no-tasks').addClass('hidden');
+$('#unfinished-tasks').removeClass('hidden');
+$('#unfinished-tasks ul').append('<%= j render(@task) %>')

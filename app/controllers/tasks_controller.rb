@@ -10,7 +10,10 @@ class TasksController < ApplicationController
     @list = List.find(params[:list_id])
     @task = @list.tasks.new(task_params)
     if @task.save
-      redirect_to list_path(@list)
+      respond_to do |format|
+        format.html { redirect_to list_path(@list) }
+        format.js
+      end
     else
       render :new
     end
@@ -23,9 +26,12 @@ class TasksController < ApplicationController
 
   def update
     @list = List.find(params[:list_id])
-    @task= Task.find(params[:id])
+    @task = Task.find(params[:id])
     if @task.update(task_params)
-      redirect_to list_path(@list)
+      respond_to do |format|
+        format.html { redirect_to list_path(@list) }
+        format.js
+      end
     else
       render :edit
     end
@@ -35,7 +41,10 @@ class TasksController < ApplicationController
     @list = List.find(params[:list_id])
     @task = Task.find(params[:id])
     @task.destroy
-    redirect_to list_path(@list)
+    respond_to do |format|
+      format.html { redirect_to list_path(@list) }
+      format.js
+    end
   end
 
 private

@@ -1,0 +1,15 @@
+<li id="task_<%= task.id %>" class="task input-group">
+  <%= task.description %> |
+  <%= link_to "Edit", edit_list_task_path(@list, task) %> |
+  <%= link_to "Delete", list_task_path(@list, task), remote: true, 
+                           :data => {:confirm => "Are you sure?",
+                                          :method => "delete"} %> |
+  <%= form_for [@list, task], remote: true do |f| %>
+    <%= f.hidden_field :done, :value => !task.done %>
+    <% if !task.done %>
+      <%= f.submit "mark done", class: 'btn btn-link' %>
+    <% else %>
+      <%= f.submit "not done", class: 'btn btn-link' %>
+    <% end %>
+  <% end %>
+</li>

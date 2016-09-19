@@ -11,8 +11,7 @@
   <body>
     <%= render 'layouts/navbar' %>
     <div class="container">
-      <%= flash[:alert] %>
-      <%= flash[:notice] %>
+      <%= render 'layouts/flash' %>
       <%= yield %>
     </div>
 
